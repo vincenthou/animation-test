@@ -1,0 +1,186 @@
+.border-radius(@radius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+.rotate(@degrees: 0deg) {
+  -webkit-transform: rotate(@degrees);
+     -moz-transform: rotate(@degrees);
+      -ms-transform: rotate(@degrees);
+       -o-transform: rotate(@degrees);
+          transform: rotate(@degrees);
+}
+
+.box-shadow(@shadow: 5px 5px 10px #cccccc) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
+}
+
+@width: 500px;
+@height: @width / 1.5;
+@borderColor: #ccc;
+@borderRadius: ~"50% / 50%";
+@eyeColor: black;
+@eyeAngle: 15deg;
+@smileColor: black;
+@headShadowColor: #ccc;
+@eyeShadowColor: #000;
+@swingAngle: 8deg;
+@blinkSize: 1.2;
+
+
+.title {
+  text-align: center;
+  font-family: Microsoft Yahei;
+}
+
+.head {
+  position: relative;
+  margin: @height / 5 auto;
+  width: @width;
+  height: @height;
+  border: 1px solid @borderColor;
+  text-align: center;
+  .border-radius(@borderRadius);
+  .box-shadow(-10px 0 50px @headShadowColor inset);
+}
+
+.eye {
+  position: absolute;
+  width: @width / 10;
+  height: @height / 6;
+  background-color: @eyeColor;
+  .border-radius(@borderRadius);
+  top: @height / 2.5;
+  &:nth-child(odd) {
+    left: @width / 5;
+    transform: rotate(@eyeAngle);
+  }
+  &:nth-child(even) {
+    right: @width / 5;
+    transform: rotate(-@eyeAngle);
+  }
+  .box-shadow(0 0 8px @eyeShadowColor);
+}
+
+.curve {
+  position: absolute;
+  width: @width / 2;
+  height: @height / 10;
+  border-bottom: 5px solid @smileColor;
+  .border-radius(50%);
+  top: @height / 2.5;
+  left: @width / 4;
+  z-index: 10;
+}
+
+//Animations
+.animate(@property){
+  -webkit-animation: @property;
+     -moz-animation: @property;
+       -o-animation: @property;
+          animation: @property;
+}
+
+@-webkit-keyframes swing {
+  0% {
+    transform: rotate(@swingAngle);
+  }
+  100% {
+    transform: rotate(-@swingAngle);
+  }
+}
+
+@-moz-keyframes swing {
+
+}
+
+@-o-keyframes swing {
+
+}
+
+@keyframes swing {
+
+}
+
+@-webkit-keyframes blink {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(@blinkSize, @blinkSize, @blinkSize);
+  }
+
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+  }
+}
+
+@-moz-keyframes blink {
+  0% {
+    -moz-transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -moz-transform: scale3d(@blinkSize, @blinkSize, @blinkSize);
+  }
+
+  100% {
+    -moz-transform: scale3d(1, 1, 1);
+  }
+}
+
+@-o-keyframes blink {
+  0% {
+    -o-transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -o-transform: scale3d(@blinkSize, @blinkSize, @blinkSize);
+  }
+
+  100% {
+    -o-transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes blink {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    transform: scale3d(@blinkSize, @blinkSize, @blinkSize);
+  }
+
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.swing {
+  -webkit-animation-name: swing;
+     -moz-animation-name: swing;
+       -o-animation-name: swing;
+          animation-name: swing;
+  .animate(swing 5s ease 0 infinite alternate);
+}
+
+.blink {
+  -webkit-animation-name: blink;
+     -moz-animation-name: blink;
+       -o-animation-name: blink;
+          animation-name: blink;
+  .animate(blink 2s ease 0 infinite alternate);
+}
+
+.blink-delay {
+  -webkit-animation-name: blink;
+     -moz-animation-name: blink;
+       -o-animation-name: blink;
+          animation-name: blink;
+  .animate(blink 2s ease 1s infinite alternate);
+}
